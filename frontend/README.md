@@ -1,3 +1,7 @@
+## About this project
+
+Simple frontend client to connect to an API through web sockets
+
 ### Dev mode
 
 `yarn dev`
