@@ -1,10 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import App from "./src/App";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+const toaster = document.getElementById("root");
+
+const root = ReactDOM.createRoot(toaster as HTMLElement);
+
+root.render(<App />);

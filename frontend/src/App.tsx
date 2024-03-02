@@ -2,12 +2,12 @@ import React from "react";
 
 import "./App.css";
 
-const App: React.FC = () => {
-  return (
-    <div>
-      <h1>Hello world!</h1>
-    </div>
-  );
-};
+function App(): React.ReactNode {
+    return (
+        <div>
+            <h1>Hello world!</h1>
+        </div>
+    );
+}
 
 export default App;
