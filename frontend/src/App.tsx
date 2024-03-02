@@ -13,24 +13,28 @@ function App(): React.ReactNode {
     const [response, setResponse] = useState<null | ExpectedResponse>(null);
     const [responseIsLoading, setResponseIsLoading] = useState(false);
 
-    useEffect(() => {
-        const ws = new W3CWebSocket("ws://localhost:3000");
+    const [ws, setWs] = useState<W3CWebSocket | null>(null);
 
-        ws.onopen = (): void => {
+    useEffect(() => {
+        const newWs = new W3CWebSocket("ws://localhost:3000");
+
+        newWs.onopen = (): void => {
             console.log("WebSocket connected");
-            ws.send("Hello server!");
+            newWs.send("Hello server!");
         };
 
-        ws.onmessage = (event: IMessageEvent): void => {
+        newWs.onmessage = (event: IMessageEvent): void => {
             console.log("Received message:", event.data);
         };
 
-        ws.onclose = (): void => {
+        newWs.onclose = (): void => {
             console.log("WebSocket disconnected");
         };
 
+        setWs(newWs);
+
         return () => {
-            ws.close();
+            newWs.close();
         };
     }, []);
 
@@ -44,12 +48,21 @@ function App(): React.ReactNode {
         setResponse(result.data);
     };
 
+    const handleSendMessage = (): void => {
+        if (ws !== null) {
+            ws.send("This is a static message!");
+        }
+    };
+
     return (
         <ViewContainer>
-            <h1>Websockets Test</h1>
+            <h1>Simple HTTP</h1>
             <button onClick={handleMakeRequest}>Make async call</button>
             {responseIsLoading && <div>Loading...</div>}
             {response !== null && <pre>{JSON.stringify(response)}</pre>}
+            <div style={{ height: "40px" }}></div>
+            <h1>Websockets</h1>
+            <button onClick={handleSendMessage}>Send static message</button>
         </ViewContainer>
     );
 }
