@@ -9,4 +9,9 @@ export default defineConfig({
         checker({ typescript: true }),
         eslint({ include: ["./src/**/*.ts", "./src/**/*.tsx"] }),
     ],
+    resolve: {
+        alias: {
+          '@': '.'
+        }
+      }
 });

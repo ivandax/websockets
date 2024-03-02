@@ -1,12 +1,13 @@
 import React from "react";
 
 import "./App.css";
+import { ViewContainer } from "@/components/ViewContainer";
 
 function App(): React.ReactNode {
     return (
-        <div>
-            <h1>Hello world!</h1>
-        </div>
+        <ViewContainer>
+            <h1>Websockets Test</h1>
+        </ViewContainer>
     );
 }
 
